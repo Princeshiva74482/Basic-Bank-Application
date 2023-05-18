@@ -1,8 +1,8 @@
 package com.bankapplication.service;
 
-import com.bankapplication.entity.AccountHolderEntity;
-import com.bankapplication.inputoutput.UserInput;
-import com.bankapplication.inputoutput.UserOutput;
+import com.bankapplication.entity.OpenAccountHolderEntity;
+import com.bankapplication.inout.UserInput;
+import com.bankapplication.inout.UserOutput;
 import com.bankapplication.repository.AccountHolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,19 +28,19 @@ public class AccountHolderService {
         if (userInput.isOpen()) {
             if (userInput.getUserId() != null && userInput.getAccountKey() != null) {
                 // Both userId and accountKey provided
-                AccountHolderEntity accountHolderEntity = accountHolderRepository.findByAccountNumber(userInput.getAccountKey());
+                OpenAccountHolderEntity accountHolderEntity = accountHolderRepository.findByAccountNumber(userInput.getAccountKey());
                 if (accountHolderEntity != null && accountHolderEntity.getAccountNumber().equals(userInput.getUserId())) {
                     mapEntityToOutput(accountHolderEntity, userOutput);
                 }
             } else if (userInput.getUserId() != null) {
                 // Only userId provided
-                AccountHolderEntity accountHolderEntity = accountHolderRepository.findByAccountNumber(userInput.getUserId());
+                OpenAccountHolderEntity accountHolderEntity = accountHolderRepository.findByAccountNumber(userInput.getUserId());
                 if (accountHolderEntity != null) {
                     mapEntityToOutput(accountHolderEntity, userOutput);
                 }
             } else if (userInput.getAccountKey() != null) {
                 // Only accountKey provided
-                AccountHolderEntity accountHolderEntity = accountHolderRepository.findByAccountNumber(userInput.getAccountKey());
+                OpenAccountHolderEntity accountHolderEntity = accountHolderRepository.findByAccountNumber(userInput.getAccountKey());
                 if (accountHolderEntity != null) {
                     mapEntityToOutput(accountHolderEntity, userOutput);
                 }
@@ -50,7 +50,7 @@ public class AccountHolderService {
         return userOutput;
     }
 
-    private void mapEntityToOutput(AccountHolderEntity accountHolderEntity, UserOutput userOutput) {
+    private void mapEntityToOutput(OpenAccountHolderEntity accountHolderEntity, UserOutput userOutput) {
         userOutput.setAccountNumber(accountHolderEntity.getAccountNumber());
         userOutput.setAccountHolderName(accountHolderEntity.getAccountHolderName());
         userOutput.setMobileNumber(accountHolderEntity.getMobileNumber());
