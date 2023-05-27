@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.0.6'
+	id 'org.springframework.boot' version '2.4.11'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -19,23 +19,44 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.4.11'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:5.3.12'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
-
-	implementation 'org.projectlombok:lombok:1.18.22'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.4.11'
-	runtimeOnly 'com.h2database:h2'
-	implementation 'org.hibernate:hibernate-core:5.5.7.Final'
-	// Spring Boot dependencies
+	implementation 'javax.servlet:javax.servlet-api:4.0.1'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//	// Groovy dependency
-	implementation 'org.codehaus.groovy:groovy-all:3.0.9'
-	// Test dependencies
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.codehaus.groovy:groovy-all:3.0.9'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.projectlombok:lombok:1.18.22'
+	implementation 'org.hibernate:hibernate-core:5.6.9.Final'
+	implementation 'org.hibernate:hibernate-core-jakarta:5.6.9.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	runtimeOnly 'com.h2database:h2'
 	implementation 'mysql:mysql-connector-java:8.0.27'
+	//MapStruct
+	implementation "org.mapstruct:mapstruct:1.4.2.Final"
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa') {
+		exclude group: 'org.hibernate', module: 'hibernate-core'
+		exclude group: 'org.hibernate', module: 'hibernate-core-jakarta'
+	}
+
+	// Exclude springfox dependencies from springfox-boot-starter
+	implementation ('io.springfox:springfox-boot-starter:3.0.0') {
+		exclude group: 'io.springfox', module: 'springfox-swagger2'
+		exclude group: 'io.springfox', module: 'springfox-spring-web'
+	}
+
+	// Include springfox dependencies individually
+	implementation 'io.springfox:springfox-swagger2:3.0.0'
+	implementation 'io.springfox:springfox-spring-web:3.0.0'
 }
 
 tasks.named('test') {
